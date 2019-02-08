@@ -1,0 +1,17 @@
+{
+  "interventions": [
+    {
+      "reference":"XXXXXX",
+      "start_date":"2001-03-03 12:00:00",
+      "end_date":"2001-03-03 12:00:00",
+      "technician":{
+        "first_name":"jean",
+        "last_name":"onon",
+        "reference":"jhsdgjhg325"
+      },
+      "type":"install",
+      "price":"320.00",
+      "status":"done"
+    }
+  ]
+}

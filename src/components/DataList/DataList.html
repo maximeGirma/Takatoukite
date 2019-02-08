@@ -1,0 +1,21 @@
+<section class="data-list">
+    <table >
+        <!--
+            <tr> </tr>: indique le début et la fin d'une ligne du tableau ;
+
+            <td> </td>: indique le début et la fin du contenu d'une cellule.
+        -->
+        <tr style="width:1000px; flex:1; justify-content: space-around;">
+            <td v-for="key in headerArray">
+                <button type="button" @click="changeOrder(key)">{{key}}</button>
+            </td>
+        </tr>
+        <tr v-for="element in interventions">
+            <td v-for="value in element">{{value}}</td>
+        </tr>
+    </table>
+
+
+
+</section>
+
