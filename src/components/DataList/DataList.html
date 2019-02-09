@@ -7,7 +7,7 @@
         -->
         <tr style="width:1000px; flex:1; justify-content: space-around;">
             <td v-for="key in headerArray">
-                <button type="button" @click="changeOrder(key)">{{key}}</button>
+                <button type="button" @click="changeOrder(key)">{{getLabel(key)}}</button>
             </td>
         </tr>
         <tr>
@@ -19,13 +19,11 @@
             <td v-for="value in element">{{value}}</td>
         </tr>
     </table>
-    <p >{{this.page}}</p>
+    <p>{{dataLength}} résultats</p>
+    <p >page {{page +1}} / {{Math.ceil(this.dataLength / this.numberPerPage)}}</p>
     <button type="button" @click="changePage('first')">première page</button>
     <button type="button" @click="changePage('previous')">page precedente</button>
     <button type="button" @click="changePage('next')">page suivante</button>
     <button type="button" @click="changePage('last')">dernière page</button>
-
-
-
 </section>
 

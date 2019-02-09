@@ -4,7 +4,7 @@ import {FILTER, ORDER} from "../../enums/DataListEnum";
 export default {
     name: 'data-list',
     components: {},
-    props: ['interventionsList']
+    props: ['interventionsList', 'labels']
     ,
     data() {
         return {
@@ -75,9 +75,9 @@ export default {
             this.lastColumnClicked === order ? this.reverse = !this.reverse : this.lastColumnClicked = order
         },
 
-        changeFilter(filter) {
-            Helpers.isInEnum(FILTER, filter) ? this.filter = filter : console.error("unknown filter : ", filter)
-        },
+        // changeFilter(filter) {
+        //     Helpers.isInEnum(FILTER, filter) ? this.filter = filter : console.error("unknown filter : ", filter)
+        // },
 
         changeOrder(order) {
             this.orderValues(order)
@@ -86,18 +86,13 @@ export default {
         changePage(direction){
 
             switch(direction){
-
                 case 'first':
                     this.page = 0
                     break
                 case 'last':
-                    console.log("shotft")
-                    console.log((this.dataLength / this.numberPerPage).toFixed())
                     this.page = Math.ceil(this.dataLength / this.numberPerPage) - 1
                     break
                 case 'next':
-                    console.log(this.dataLength )
-                    console.log(this.page * this.numberPerPage)
                     if (this.dataLength > (this.page * this.numberPerPage)+this.numberPerPage){
                         this.page += 1
                     }
@@ -108,11 +103,15 @@ export default {
                     }
                     break
                 default:
-                    console.error("ké? no abla la pagos?")
                     break
             }
-
-            // console.log(this.page)
+        },
+        getLabel(rawLabel){
+            if (this.labels[rawLabel] !== undefined){
+                return this.labels[rawLabel]
+            } else {
+                return rawLabel
+            }
         }
     }
 }
