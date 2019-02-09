@@ -16,12 +16,17 @@ export default {
             reverse: false,
             page:0,
             numberPerPage: 5,
+            dataLength: this.interventionsList.length,
             searchFields: []
         }
     },
     computed: {
         filteredInterventions() {
+
+            let dataToDisplay
+
             if ((!Helpers.isElementsInArrayEmpty(Helpers.getArrayFromObject(this.searchFields)))) {
+                // this.page = 0
                 let searchedInterventions = []
                 for(let i =0; i < this.interventionsList.length; i++){
                     let interventionAsArray = Helpers.getArrayFromObject(this.interventionsList[i])
@@ -35,14 +40,13 @@ export default {
                         searchedInterventions.push(this.interventionsList[i])
                     }
                 }
-
-
-
-
-                return searchedInterventions.slice(this.page * this.numberPerPage,(this.page * this.numberPerPage) + this.numberPerPage)
+                dataToDisplay = searchedInterventions
             } else {
-                return this.interventions.slice(this.page * this.numberPerPage,(this.page * this.numberPerPage) + this.numberPerPage)
+                dataToDisplay =  this.interventions
             }
+            this.dataLength = dataToDisplay.length
+            return dataToDisplay.slice(this.page * this.numberPerPage,(this.page * this.numberPerPage) + this.numberPerPage)
+
         }
     },
     mounted() {
@@ -82,18 +86,19 @@ export default {
         changePage(direction){
 
             switch(direction){
+
                 case 'first':
                     this.page = 0
                     break
                 case 'last':
-                    console.log(this.interventions.length)
-                    console.log(this.numberPerPage)
-                    console.log(this.interventions.length / this.numberPerPage)
-                    console.log((this.interventions.length / this.numberPerPage).toFixed())
-                    this.page = (this.interventions.length / this.numberPerPage).toFixed() -1
+                    console.log("shotft")
+                    console.log((this.dataLength / this.numberPerPage).toFixed())
+                    this.page = Math.ceil(this.dataLength / this.numberPerPage) - 1
                     break
                 case 'next':
-                    if (this.interventions.length > this.page * this.numberPerPage){
+                    console.log(this.dataLength )
+                    console.log(this.page * this.numberPerPage)
+                    if (this.dataLength > (this.page * this.numberPerPage)+this.numberPerPage){
                         this.page += 1
                     }
                     break
@@ -107,7 +112,7 @@ export default {
                     break
             }
 
-            console.log(this.page)
+            // console.log(this.page)
         }
     }
 }
