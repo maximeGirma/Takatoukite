@@ -67,7 +67,7 @@ export class Service {
                 "telephone_number": tech.telephone_number,
                 "type": this.getType(),
                 "price": faker.commerce.price(),
-                "status": this.getStatus()
+                "status": this.getStatus(),
             }
             randomData.push(item)
         }

@@ -25,4 +25,17 @@ export class Helpers {
         }
         return false
     }
+
+    static isElementsInArrayEmpty(list){
+        let isEmpty = true
+        for(let i = 0; i < list.length; i++){
+            if (list[i] !== '' && list[i] !== null && list[i] !== undefined  ){
+                isEmpty = false
+                break
+            } else{
+                isEmpty = true
+            }
+        }
+        return isEmpty
+    }
 }

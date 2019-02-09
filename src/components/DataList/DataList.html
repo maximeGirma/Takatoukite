@@ -10,10 +10,20 @@
                 <button type="button" @click="changeOrder(key)">{{key}}</button>
             </td>
         </tr>
-        <tr v-for="element in interventions">
+        <tr>
+            <td v-for="(key,index) in headerArray">
+                <input v-model="searchFields[index]" />
+            </td>
+        </tr>
+        <tr v-for="element in filteredInterventions">
             <td v-for="value in element">{{value}}</td>
         </tr>
     </table>
+    <p >{{this.page}}</p>
+    <button type="button" @click="changePage('first')">première page</button>
+    <button type="button" @click="changePage('previous')">page precedente</button>
+    <button type="button" @click="changePage('next')">page suivante</button>
+    <button type="button" @click="changePage('last')">dernière page</button>
 
 
 
