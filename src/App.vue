@@ -1,5 +1,5 @@
 <template>
-    <div id="app" style="background-color: #0b76cc">
+    <div id="app">
 
         <!--<img alt="Vue logo" src="./assets/logo.png">-->
         <DataList :interventionsList="interventionsList" :labels="labels"/>

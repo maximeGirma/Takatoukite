@@ -1,24 +1,26 @@
 <section class="data-list">
+    <div style="overflow-x:auto;">
     <table >
         <!--
             <tr> </tr>: indique le début et la fin d'une ligne du tableau ;
 
             <td> </td>: indique le début et la fin du contenu d'une cellule.
         -->
-        <tr style="width:1000px; flex:1; justify-content: space-around;">
+        <tr class="headers" style="flex:1; justify-content: space-around;">
             <td v-for="key in headerArray">
-                <button type="button" @click="changeOrder(key)">{{getLabel(key)}}</button>
+                <b-button type="button" @click="changeOrder(key)">{{getLabel(key)}}</b-button>
             </td>
         </tr>
         <tr>
             <td v-for="(key,index) in headerArray">
-                <input v-model="searchFields[index]" />
+                <input class="searchFields" v-model="searchFields[index]" />
             </td>
         </tr>
-        <tr v-for="element in filteredInterventions">
-            <td v-for="value in element">{{value}}</td>
+        <tr class="results" v-for="element in filteredInterventions">
+            <td  v-for="value in element">{{value}}</td>
         </tr>
     </table>
+    </div>
     <p>{{dataLength}} résultats</p>
     <p >page {{page +1}} / {{Math.ceil(this.dataLength / this.numberPerPage)}}</p>
     <button type="button" @click="changePage('first')">première page</button>

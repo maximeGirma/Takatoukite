@@ -115,3 +115,11 @@ export default {
         }
     }
 }
+
+/*
+
+table, tr, td {
+  border: 1px solid black;
+  border-spacing: 0;
+}
+ */

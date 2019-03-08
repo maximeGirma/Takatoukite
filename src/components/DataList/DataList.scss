@@ -1,8 +1,28 @@
 .data-list {
 
 }
-
 table, tr, td {
   border: 1px solid black;
   border-spacing: 0;
 }
+
+th, td, tr {
+  padding: 10px;
+  text-align: left;
+}
+
+.headers{
+  background-color: #4CAF50;
+  color: white;
+}
+
+.searchFields{
+  width: 100%;
+}
+
+#results{
+
+}
+
+.results:nth-child(even) {background-color: #f2f2f2;}
+.results:hover {background-color: #d6d6d6;}
