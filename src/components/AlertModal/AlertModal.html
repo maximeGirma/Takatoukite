@@ -1,0 +1,12 @@
+
+<div id="mainContainer" v-if="displayAlert">
+<div id="greyBackground">
+
+</div>
+    <div id="textContainer">
+        <p>Etes vous sur de vouloir Supprimer cette intervention?</p>
+        <input type="button" value="Supprimer" id="deleteButton" @click="deleteIntervention"/>
+        <input type="button" value="Annuler" @click="cancelDelete"/>
+    </div>
+
+</div>

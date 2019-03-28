@@ -1,4 +1,9 @@
-<section class="data-list">
+
+<section class="data-list"
+         v-on=""
+
+>
+    <AlertModal :displayAlert="displayAlert"/>
     <div style="overflow-x:auto;">
     <table >
         <!--
@@ -17,8 +22,14 @@
             </td>
         </tr>
         <tr class="results" v-for="element in filteredInterventions">
-            <td  v-for="value in element">{{value}}</td>
+            <td  v-for="value in element"><p>{{value}}</p></td>
+            <td @click="testClick"><font-awesome-icon icon="info-circle" /></td>
+            <td ><font-awesome-icon icon="pen" /></td>
+            <td @click="taMereLaPute(element.reference)"><font-awesome-icon icon="trash-alt" /></td>
         </tr>
+
+
+
     </table>
     </div>
     <p>{{dataLength}} résultats</p>

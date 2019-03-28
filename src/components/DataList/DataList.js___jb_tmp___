@@ -1,12 +1,10 @@
-/* eslint-disable */
 import {Helpers} from "../../utils/Helpers";
 import {FILTER, ORDER} from "../../enums/DataListEnum";
-import AlertModal from "../AlertModal/index.vue";
 
 export default {
     name: 'data-list',
     components: {
-        AlertModal
+
     },
     props: ['interventionsList', 'labels']
     ,
@@ -21,9 +19,7 @@ export default {
             page:0,
             numberPerPage: 5,
             dataLength: this.interventionsList.length,
-            searchFields: [],
-            displayAlert: false,
-            selectedRef: null
+            searchFields: []
         }
     },
     computed: {
@@ -58,15 +54,6 @@ export default {
     mounted() {
         this.headerArray.map(() => {
             this.searchFields.push("")
-        })
-        this.$root.$on('confirmDeletion',()=>{
-            for (let i = 0; i< this.interventionsList.length; i++){
-                if (this.interventionsList[i].reference === this.selectedRef){
-                    this.interventionsList.splice(i,1)
-                    break
-                }
-            }
-            this.displayAlert = false
         })
     },
     methods: {
@@ -133,11 +120,10 @@ export default {
             } else {
                 return rawLabel
             }
-        },
-        taMereLaPute(reference){
-            this.displayAlert = true
-            this.selectedRef = reference
-
         }
     }
 }
+
+/*
+
+table,

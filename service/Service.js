@@ -43,8 +43,15 @@ const status = [
 const faker = require('faker')
 faker.locale = 'fr'
 
+
+
 export class Service {
+
+    static interventionsList = null
+
     static getInterventions() {
+        if (this.interventionsList === null) {
+
 
         const faker = require('faker')
         faker.locale = 'fr'
@@ -71,7 +78,11 @@ export class Service {
             }
             randomData.push(item)
         }
+        this.interventionsList = randomData
         return randomData
+        } else {
+            return this.interventionsList
+        }
     }
 
     static getReference() {
@@ -109,4 +120,19 @@ export class Service {
     static getStatus(){
         return status[Math.floor(Math.random() * Math.floor(status.length))]
     }
+
+
+    /*static deleteIntervention(reference){
+        console.log('toto')
+        console.log(reference)
+
+        for (let i = 0; i< this.interventionsList.length; i++){
+            if (this.interventionsList[i].reference === reference){
+                this.interventionsList.splice(i,1)
+                console.log('i m batman')
+            }
+        }
+        console.log(this.interventionsList.length)
+    }*/
+
 }

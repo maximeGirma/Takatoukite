@@ -7,8 +7,12 @@ table, tr, td {
 }
 
 th, td, tr {
-  padding: 10px;
-  text-align: left;
+  //padding: 10px;
+  text-align: center;
+  min-width: 50px;
+  //max-width: 250px;
+  height: auto;
+  //display
 }
 
 .headers{
@@ -26,3 +30,15 @@ th, td, tr {
 
 .results:nth-child(even) {background-color: #f2f2f2;}
 .results:hover {background-color: #d6d6d6;}
+
+//responsive
+
+@media all and (max-width: 980px){
+  th, td, tr {
+    background-color: #5b40ff;
+  }
+}
+//
+//@media all and (max-width: 230px) {
+//
+//}

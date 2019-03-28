@@ -36,6 +36,13 @@
             }
         },
         mounted() {
+
+        },
+        methods:{
+            testinou(reference){
+                alert('deleting...')
+                Service.deleteIntervention(reference)
+            },
         }
     }
 </script>
