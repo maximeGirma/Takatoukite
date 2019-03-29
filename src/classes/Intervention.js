@@ -41,4 +41,21 @@ export class Intervention {
             status: this.status
         }
     }
+
+    getFullIntervention(){
+        return {
+        reference: this.reference,
+        startDate: this.startDate,
+        endDate: this.endDate,
+        address: this.address,
+        city: this.city,
+        zip: this.zip,
+        technicianFirstName: this.technicianFirstName,
+        technicianLastName: this.technicianLastName,
+        telephoneNumber: this.telephoneNumber,
+        type: this.type,
+        price: this.price,
+        status: this.status
+        }
+    }
 }

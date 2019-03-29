@@ -2,13 +2,15 @@
 import {Helpers} from "../../utils/Helpers";
 import {FILTER, ORDER} from "../../enums/DataListEnum";
 import AlertModal from "../AlertModal/index.vue";
+import Details from "../Details/index.vue";
 
 export default {
     name: 'data-list',
     components: {
-        AlertModal
+        AlertModal,
+        Details
     },
-    props: ['interventionsList', 'labels']
+    props: ['interventionsList', 'labels', 'interventionDetails']
     ,
     data() {
         return {
@@ -23,16 +25,19 @@ export default {
             dataLength: this.interventionsList.length,
             searchFields: [],
             displayAlert: false,
-            selectedRef: null
+            selectedRef: null,
+            interventionToEdit: {reference :null},
+            interventionDetail: this.interventionDetails,
         }
     },
     computed: {
         filteredInterventions() {
 
             let dataToDisplay
-
+            console.log('juste avant le if')
             if ((!Helpers.isElementsInArrayEmpty(Helpers.getArrayFromObject(this.searchFields)))) {
                 // this.page = 0
+                console.log('MOI AUSSI ! ! ! ! !! ')
                 let searchedInterventions = []
                 for(let i =0; i < this.interventionsList.length; i++){
                     let interventionAsArray = Helpers.getArrayFromObject(this.interventionsList[i])
@@ -48,6 +53,7 @@ export default {
                 }
                 dataToDisplay = searchedInterventions
             } else {
+                console.log('ET ON FAIT DES PETITS TOURS !!!!')
                 dataToDisplay =  this.interventions
             }
             this.dataLength = dataToDisplay.length
@@ -56,6 +62,8 @@ export default {
         }
     },
     mounted() {
+        console.log(this.interventionDetails)
+        console.log(this.interventionDetail)
         this.headerArray.map(() => {
             this.searchFields.push("")
         })
@@ -134,10 +142,34 @@ export default {
                 return rawLabel
             }
         },
-        taMereLaPute(reference){
+        askForDeletion(reference){
             this.displayAlert = true
             this.selectedRef = reference
 
+        },
+        fastEdit(reference){
+            for (let i = 0; i< this.interventionsList.length; i++){
+                if (this.interventionsList[i].reference === reference){
+                    this.interventionToEdit = Object.assign({}, this.interventionsList[i])
+                    console.log(this.interventionToEdit)
+                    break
+                }
+            }
+        },
+        validateChanges(){
+
+            this.$emit('updateIntervention',this.interventionToEdit)
+            this.interventionToEdit = {}
+        },
+        cancelChanges(){
+            this.interventionToEdit = {}
+        },
+
+        setDetailsIntervention(reference){
+            console.log('in datalist js')
+            this.$emit('setDetailsIntervention', reference)
+
         }
+
     }
 }

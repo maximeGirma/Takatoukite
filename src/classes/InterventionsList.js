@@ -17,4 +17,14 @@ export class InterventionsList{
         }
         return data
     }
+
+    getFullIntervention(reference){
+
+        for (let i = 0; i < this.interventionsList.length; i++){
+            if (this.interventionsList[i].reference === reference){
+                console.log("let's go")
+                return this.interventionsList[i].getFullIntervention()
+            }
+        }
+    }
 }

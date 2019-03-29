@@ -31,6 +31,15 @@ th, td, tr {
 .results:nth-child(even) {background-color: #f2f2f2;}
 .results:hover {background-color: #d6d6d6;}
 
+.actionContainer{
+  display:flex;
+  flex-direction: row ;
+  justify-content: space-around;
+}
+
+.actionItems{
+  padding: 2px;
+}
 //responsive
 
 @media all and (max-width: 980px){

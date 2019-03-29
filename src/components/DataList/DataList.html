@@ -5,7 +5,8 @@
 >
     <AlertModal :displayAlert="displayAlert"/>
     <div style="overflow-x:auto;">
-    <table >
+
+    <table v-if="interventionDetails === null">
         <!--
             <tr> </tr>: indique le début et la fin d'une ligne du tableau ;
 
@@ -22,15 +23,28 @@
             </td>
         </tr>
         <tr class="results" v-for="element in filteredInterventions">
-            <td  v-for="value in element"><p>{{value}}</p></td>
-            <td @click="testClick"><font-awesome-icon icon="info-circle" /></td>
-            <td ><font-awesome-icon icon="pen" /></td>
-            <td @click="taMereLaPute(element.reference)"><font-awesome-icon icon="trash-alt" /></td>
+            <td  v-for="value, index in element">
+                <p v-if="interventionToEdit.reference !== element.reference" >{{value}}</p>
+                <input v-else v-model="interventionToEdit[index]"/>
+
+            </td>
+            <div v-if="interventionToEdit.reference !== element.reference" class="actionContainer">
+                <p class="actionItems" @click="setDetailsIntervention(element.reference)"><font-awesome-icon icon="info-circle" /></p>
+                <p class="actionItems" @click="fastEdit(element.reference)"><font-awesome-icon icon="pen" /></p>
+                <p class="actionItems" @click="askForDeletion(element.reference)"><font-awesome-icon icon="trash-alt" /></p>
+            </div>
+            <div v-else class="actionContainer">
+                <p class="actionItems" @click="validateChanges"><font-awesome-icon icon="check" /></p>
+                <p class="actionItems" @click="cancelChanges"><font-awesome-icon icon="times" /></p>
+            </div>
         </tr>
 
 
 
     </table>
+        <div v-else>
+            {{interventionDetails}}
+        </div>
     </div>
     <p>{{dataLength}} résultats</p>
     <p >page {{page +1}} / {{Math.ceil(this.dataLength / this.numberPerPage)}}</p>

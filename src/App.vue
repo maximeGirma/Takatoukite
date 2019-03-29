@@ -2,7 +2,7 @@
     <div id="app">
 
         <!--<img alt="Vue logo" src="./assets/logo.png">-->
-        <DataList :interventionsList="interventionsList" :labels="labels"/>
+        <DataList :interventionsList="interventionsList" :labels="labels" @updateIntervention="updateIntervention" @setDetailsIntervention="setDetailsIntervention"/>
     </div>
 </template>
 
@@ -11,6 +11,8 @@
     import {Service} from "../service/Service";
     import {InterventionsList} from "./classes/InterventionsList";
 
+    const rawData = Service.getInterventions()
+
     export default {
         name: 'app',
         components: {
@@ -18,7 +20,8 @@
         },
         data() {
             return {
-                interventionsList: new InterventionsList(Service.getInterventions()).getAbstractInterventions(),
+                interventionsList: new InterventionsList(rawData).getAbstractInterventions(),
+                interventionDetails: 'mais',
                 labels: {
                     reference: 'Ref',
                     startDate: 'Date début',
@@ -43,8 +46,27 @@
                 alert('deleting...')
                 Service.deleteIntervention(reference)
             },
+            updateIntervention(interventionToEdit){
+                console.log('in the parent')
+                console.log(this.interventionsList)
+                for (let i = 0; i < this.interventionsList.length; i++){
+                    if (this.interventionsList[i].reference === interventionToEdit.reference){
+                           this.$set(this.interventionsList, i, interventionToEdit)
+                        break
+                    }
+                }
+            },
+            setDetailsIntervention(reference){
+                console.log('in app.vue')
+                console.log(reference)
+                // this.$set(this.interventionDetails, 0,  new InterventionsList(rawData).getFullIntervention(reference))
+                console.log(new InterventionsList(rawData).getFullIntervention(reference))
+                this.interventionDetails = new InterventionsList(rawData).getFullIntervention(reference)
+
+                }
+            }
         }
-    }
+
 </script>
 
 <style>
