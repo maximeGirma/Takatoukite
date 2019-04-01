@@ -2,15 +2,16 @@
 import {Helpers} from "../../utils/Helpers";
 import {FILTER, ORDER} from "../../enums/DataListEnum";
 import AlertModal from "../AlertModal/index.vue";
-import Details from "../Details/index.vue";
+import PageSelector from "../PageSelector/index.vue";
 
 export default {
     name: 'data-list',
     components: {
         AlertModal,
-        Details
+        PageSelector,
+
     },
-    props: ['interventionsList', 'labels', 'interventionDetails']
+    props: ['interventionsList', 'labels']
     ,
     data() {
         return {
@@ -20,14 +21,13 @@ export default {
             order: ORDER.DEFAULT,
             lastColumnClicked: null,
             reverse: false,
-            page:0,
+            page: 0,
             numberPerPage: 5,
             dataLength: this.interventionsList.length,
             searchFields: [],
             displayAlert: false,
             selectedRef: null,
-            interventionToEdit: {reference :null},
-            interventionDetail: this.interventionDetails,
+            interventionToEdit: {reference: null},
         }
     },
     computed: {
@@ -39,38 +39,40 @@ export default {
                 // this.page = 0
                 console.log('MOI AUSSI ! ! ! ! !! ')
                 let searchedInterventions = []
-                for(let i =0; i < this.interventionsList.length; i++){
+                for (let i = 0; i < this.interventionsList.length; i++) {
                     let interventionAsArray = Helpers.getArrayFromObject(this.interventionsList[i])
                     let shouldReturnIntervention = true
-                    for (let a =0; a < interventionAsArray.length; a++){
-                        if (!interventionAsArray[a].includes(this.searchFields[a])){
+                    for (let a = 0; a < interventionAsArray.length; a++) {
+                        if (!interventionAsArray[a].includes(this.searchFields[a])) {
                             shouldReturnIntervention = false
                         }
                     }
-                    if(shouldReturnIntervention){
+                    if (shouldReturnIntervention) {
                         searchedInterventions.push(this.interventionsList[i])
                     }
                 }
                 dataToDisplay = searchedInterventions
             } else {
                 console.log('ET ON FAIT DES PETITS TOURS !!!!')
-                dataToDisplay =  this.interventions
+                dataToDisplay = this.interventions
             }
             this.dataLength = dataToDisplay.length
-            return dataToDisplay.slice(this.page * this.numberPerPage,(this.page * this.numberPerPage) + this.numberPerPage)
-
+            console.log(this.numberPerPage)
+            console.log(this.page * this.numberPerPage, (this.page * this.numberPerPage) + this.numberPerPage)
+            return dataToDisplay.slice(this.page * parseInt(this.numberPerPage), (this.page * parseInt(this.numberPerPage)) +
+                parseInt(this.numberPerPage))
         }
     },
     mounted() {
-        console.log(this.interventionDetails)
-        console.log(this.interventionDetail)
         this.headerArray.map(() => {
             this.searchFields.push("")
         })
-        this.$root.$on('confirmDeletion',()=>{
-            for (let i = 0; i< this.interventionsList.length; i++){
-                if (this.interventionsList[i].reference === this.selectedRef){
-                    this.interventionsList.splice(i,1)
+
+
+        this.$root.$on('confirmDeletion', () => {
+            for (let i = 0; i < this.interventionsList.length; i++) {
+                if (this.interventionsList[i].reference === this.selectedRef) {
+                    this.interventionsList.splice(i, 1)
                     break
                 }
             }
@@ -79,7 +81,7 @@ export default {
     },
     methods: {
 
-        testClick(){
+        testClick() {
             console.log('mais....')
             alert('pouet!')
         },
@@ -112,9 +114,9 @@ export default {
             this.orderValues(order)
         },
 
-        changePage(direction){
+        changePage(direction) {
 
-            switch(direction){
+            switch (direction) {
                 case 'first':
                     this.page = 0
                     break
@@ -122,12 +124,12 @@ export default {
                     this.page = Math.ceil(this.dataLength / this.numberPerPage) - 1
                     break
                 case 'next':
-                    if (this.dataLength > (this.page * this.numberPerPage)+this.numberPerPage){
+                    if (this.dataLength > (this.page * this.numberPerPage) + this.numberPerPage) {
                         this.page += 1
                     }
                     break
                 case 'previous':
-                    if (this.page > 0){
+                    if (this.page > 0) {
                         this.page -= 1
                     }
                     break
@@ -135,37 +137,37 @@ export default {
                     break
             }
         },
-        getLabel(rawLabel){
-            if (this.labels[rawLabel] !== undefined){
+        getLabel(rawLabel) {
+            if (this.labels[rawLabel] !== undefined) {
                 return this.labels[rawLabel]
             } else {
                 return rawLabel
             }
         },
-        askForDeletion(reference){
+        askForDeletion(reference) {
             this.displayAlert = true
             this.selectedRef = reference
 
         },
-        fastEdit(reference){
-            for (let i = 0; i< this.interventionsList.length; i++){
-                if (this.interventionsList[i].reference === reference){
+        fastEdit(reference) {
+            for (let i = 0; i < this.interventionsList.length; i++) {
+                if (this.interventionsList[i].reference === reference) {
                     this.interventionToEdit = Object.assign({}, this.interventionsList[i])
                     console.log(this.interventionToEdit)
                     break
                 }
             }
         },
-        validateChanges(){
+        validateChanges() {
 
-            this.$emit('updateIntervention',this.interventionToEdit)
+            this.$emit('updateIntervention', this.interventionToEdit)
             this.interventionToEdit = {}
         },
-        cancelChanges(){
+        cancelChanges() {
             this.interventionToEdit = {}
         },
 
-        setDetailsIntervention(reference){
+        setDetailsIntervention(reference) {
             console.log('in datalist js')
             this.$emit('setDetailsIntervention', reference)
 

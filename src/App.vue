@@ -2,7 +2,21 @@
     <div id="app">
 
         <!--<img alt="Vue logo" src="./assets/logo.png">-->
-        <DataList :interventionsList="interventionsList" :labels="labels" @updateIntervention="updateIntervention" @setDetailsIntervention="setDetailsIntervention"/>
+
+        <DataList
+                v-if="!interventionDetails"
+                :interventionsList="interventionsList"
+                :labels="labels"
+                @setDetailsIntervention="setDetailsIntervention"
+                @updateIntervention="updateIntervention"
+        />
+
+        <Details
+                v-else
+                :details="interventionDetails"
+                @updateIntervention="updateIntervention"
+                @goBack="setDetailsIntervention"
+        />
     </div>
 </template>
 
@@ -10,18 +24,20 @@
     import DataList from "./components/DataList/index.vue";
     import {Service} from "../service/Service";
     import {InterventionsList} from "./classes/InterventionsList";
+    import Details from "./components/Details/index.vue";
 
-    const rawData = Service.getInterventions()
+    const interventionsData = new InterventionsList(Service.getInterventions())
 
     export default {
         name: 'app',
         components: {
-            DataList
+            DataList,
+            Details
         },
         data() {
             return {
-                interventionsList: new InterventionsList(rawData).getAbstractInterventions(),
-                interventionDetails: 'mais',
+                interventionsList: interventionsData.getAbstractInterventions(),
+                interventionDetails: null,
                 labels: {
                     reference: 'Ref',
                     startDate: 'Date début',
@@ -41,31 +57,43 @@
         mounted() {
 
         },
-        methods:{
-            testinou(reference){
+        methods: {
+            testinou(reference) {
                 alert('deleting...')
                 Service.deleteIntervention(reference)
             },
-            updateIntervention(interventionToEdit){
+            updateIntervention(interventionToEdit) {
                 console.log('in the parent')
                 console.log(this.interventionsList)
-                for (let i = 0; i < this.interventionsList.length; i++){
-                    if (this.interventionsList[i].reference === interventionToEdit.reference){
-                           this.$set(this.interventionsList, i, interventionToEdit)
-                        break
-                    }
-                }
+                console.log(interventionToEdit.city)
+                interventionsData.updateIntervention(interventionToEdit)
+
+                // for (let i = 0; i < this.interventionsList.length; i++) {
+                //     if (this.interventionsList[i].reference === interventionToEdit.reference) {
+                //         this.$set(this.interventionsList, i, interventionToEdit)
+                //         break
+                //     }
+                // }
+                this.refreshInterventions()
             },
-            setDetailsIntervention(reference){
+
+            setDetailsIntervention(reference) {
                 console.log('in app.vue')
                 console.log(reference)
                 // this.$set(this.interventionDetails, 0,  new InterventionsList(rawData).getFullIntervention(reference))
-                console.log(new InterventionsList(rawData).getFullIntervention(reference))
-                this.interventionDetails = new InterventionsList(rawData).getFullIntervention(reference)
 
-                }
+                this.interventionDetails = interventionsData.getFullIntervention(reference)
+
+            },
+            refreshInterventions() {
+                let freshData = interventionsData.getAbstractInterventions()
+                freshData.map((value, index)=>{
+                    this.$set(this.interventionsList, index, value)
+                })
             }
         }
+
+    }
 
 </script>
 

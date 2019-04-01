@@ -1,4 +1,29 @@
+<div >
+    <input type="button" value="Retour" id="return" @click="goBack"/>
+    <table>
+        <tr>
+            <td class="headers" v-for="element in headerArray">{{element}}</td>
+        </tr>
+        <tr>
+            <td  v-for="element, index in mDetails">
+                <p v-if="!editMode">{{element}}</p>
+                <input v-else v-model="mDetails[index]"/>
+            </td>
 
-<div id="mainContainer">
-<p>Coucou. Tu veux voir ma bite?</p>
+            <div v-if="!editMode" class="actionContainer">
+                <p class="actionItems" @click="toggleEditMode(true)"><font-awesome-icon icon="pen" /></p>
+                <p class="actionItems" @click="askForDeletion(element.reference)"><font-awesome-icon icon="trash-alt" /></p>
+            </div>
+            <div v-else class="actionContainer">
+                <p class="actionItems" @click="validateChanges"><font-awesome-icon icon="check" /></p>
+                <p class="actionItems" @click="toggleEditMode(false)"><font-awesome-icon icon="times" /></p>
+            </div>
+
+
+
+
+        </tr>
+
+    </table>
+
 </div>

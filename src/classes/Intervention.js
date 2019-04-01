@@ -14,6 +14,7 @@ export class Intervention {
     status
 
     constructor(rawIntervention) {
+
         this.reference = rawIntervention.reference
         this.startDate = rawIntervention.start_date.slice(0,10)
         this.endDate = rawIntervention.end_date.slice(0,10)

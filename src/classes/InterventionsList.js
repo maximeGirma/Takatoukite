@@ -1,4 +1,5 @@
 import {Intervention} from "./Intervention";
+import {Helpers} from "../utils/Helpers";
 
 export class InterventionsList{
 
@@ -26,5 +27,20 @@ export class InterventionsList{
                 return this.interventionsList[i].getFullIntervention()
             }
         }
+        return null
+    }
+
+    updateIntervention(intervention){
+        for (let i = 0; i < this.interventionsList.length; i++){
+            if (this.interventionsList[i].reference === intervention.reference){
+                console.log("let's update in the class")
+                let keys = Helpers.getKeysFromObject(intervention)
+
+                for (let a = 0; a < keys.length; a++) {
+                    this.interventionsList[i][keys[a]] = intervention[keys[a]]
+                }
+            }
+        }
+        return this
     }
 }
