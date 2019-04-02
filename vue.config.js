@@ -1,5 +1,5 @@
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
-        ? '/TAKATOUKITE/dist/'
+        ? '/home/team42/TAKATOUKITE/dist/'
         : '/'
 }
