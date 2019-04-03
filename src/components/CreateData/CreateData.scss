@@ -1,0 +1,52 @@
+#mainContainer{
+  display:flex;
+  flex-direction: column;
+  overflow-x:auto;
+  overflow-y:auto;
+  width: 600px;
+  background-color: #eae9e5;
+  margin: auto;
+}
+
+#subContainer{
+  display:flex;
+  flex-direction: column;
+}
+
+#erreurForm{
+    width: 300px;
+    height: 200px;
+    background-color: #ff0500;
+    display:flex;
+    align-self: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+}
+
+.createLine{
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+
+  margin-top: 10px;
+}
+
+#label{
+  text-align: left;
+  width: 200px;
+}
+
+#input{
+  width: 300px;
+  height: 30px;
+}

@@ -1,8 +1,8 @@
 <template>
-    <div id="app">
+    <div id="app" >
 
         <!--<img alt="Vue logo" src="./assets/logo.png">-->
-
+        <p>Interventions manager</p>
         <DataList
                 v-if="!interventionDetails"
                 :interventionsList="interventionsList"
@@ -39,7 +39,7 @@
                 interventionsList: interventionsData.getAbstractInterventions(),
                 interventionDetails: null,
                 labels: {
-                    reference: 'Ref',
+                    reference: 'Reference',
                     startDate: 'Date début',
                     endDate: 'Date fin',
                     address: 'Adresse',
@@ -55,7 +55,10 @@
             }
         },
         mounted() {
-
+            this.$root.$on('confirmCreationEvent', (data)=>{
+                console.log('event root in App.vue trigered', data)
+                interventionsData.addIntervention(data)
+            })
         },
         methods: {
             testinou(reference) {

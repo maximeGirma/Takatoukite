@@ -3,12 +3,16 @@ import {Helpers} from "../../utils/Helpers";
 import {FILTER, ORDER} from "../../enums/DataListEnum";
 import AlertModal from "../AlertModal/index.vue";
 import PageSelector from "../PageSelector/index.vue";
+import CreateData from "../CreateData/index.vue";
+import MainButton from "../MainButton/index.vue";
 
 export default {
     name: 'data-list',
     components: {
         AlertModal,
         PageSelector,
+        CreateData,
+        MainButton,
 
     },
     props: ['interventionsList', 'labels']
@@ -28,7 +32,8 @@ export default {
             displayAlert: false,
             selectedRef: null,
             interventionToEdit: {reference: null},
-            fieldToEdit:null
+            fieldToEdit:null,
+            createMode: false
         }
     },
     computed: {
@@ -79,9 +84,12 @@ export default {
             }
             this.displayAlert = false
         })
+        this.$root.$on('confirmCreationEvent', (data)=>{
+            console.log('event root trigered', data)
+            this.createMode = false
+        })
     },
     methods: {
-
         testClick() {
             console.log('mais....')
             alert('pouet!')
@@ -180,6 +188,20 @@ export default {
             console.log('in datalist js')
             this.$emit('setDetailsIntervention', reference)
 
+        },
+
+        activateCreationMode(){
+            console.log('MAIS.....')
+            this.createMode = true
+        },
+        confirmCreation(data){
+            console.log('activated and should')
+            console.log(data)
+
+        },
+        cancelCreation(){
+            console.log('kjjhgjhgjhgjhg')
+            this.createMode = false
         }
 
     }

@@ -1,0 +1,36 @@
+<div id="mainContainer">
+    <div id="erreurForm" v-if="errorForm !== null">
+        <p>Le formulaire est invalide.</p>
+        <p>{{errorForm}}</p>
+
+
+        <MainButton
+                :eventKey="'dismissModal'"
+                :label="'Fermer'"
+                @dismissModal="dismissModal"
+        />
+    </div>
+    <div id="subContainer" v-for="value, key in keysArray">
+        <div v-if="key !== 'reference'" class="createLine">
+            <p id="label">{{value}}</p>
+            <input id="input" v-model="data[key]"/>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div v-if="key !== 'ref'" class="buttonContainer">
+        <MainButton
+                :label="'Ajouter l\'intervention'"
+                :eventKey="'confirmCreationEvent'"
+                @confirmCreationEvent="confirmCreation"
+        />
+        <MainButton
+                :label="'Retour'"
+                :eventKey="'cancelEvent'"
+                @cancelEvent="cancelCreation"
+        />
+    </div>
+
+</div>
+</div>

@@ -1,9 +1,24 @@
-<section class="data-list"
-         v-on=""
+<div>
+    <CreateData
+            v-if="createMode"
+            @cancelCreationEvent="cancelCreation"
+    />
+
+    <section class="data-list"
+             v-else
 
 >
     <AlertModal :displayAlert="displayAlert"/>
+
+
+
     <div style="overflow-x:auto;">
+        <!--TODO: GENERALIZE EVERYWHERE AND MAKE A WISH, FIRST HOME MADE VUE COMPONENT :)-->
+        <MainButton
+                :label="'Ajouter une intervention'"
+                :eventKey="'addIntervention'"
+                @addIntervention="activateCreationMode"
+        />
 
         <!--Would be cool to select his own elements-->
         <!--<tr >-->
@@ -89,4 +104,4 @@
     <button type="button" @click="changePage('next')">page suivante</button>
     <button type="button" @click="changePage('last')">dernière page</button>
 </section>
-
+</div>
