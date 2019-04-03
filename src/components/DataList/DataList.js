@@ -28,6 +28,7 @@ export default {
             displayAlert: false,
             selectedRef: null,
             interventionToEdit: {reference: null},
+            fieldToEdit:null
         }
     },
     computed: {
@@ -158,10 +159,18 @@ export default {
                 }
             }
         },
+        singleEdit(reference, index){
+            console.log('toto')
+            this.fieldToEdit = index
+            this.fastEdit(reference)
+            console.log(this.fieldToEdit)
+        },
+
         validateChanges() {
 
             this.$emit('updateIntervention', this.interventionToEdit)
             this.interventionToEdit = {}
+            this.fieldToEdit = null
         },
         cancelChanges() {
             this.interventionToEdit = {}

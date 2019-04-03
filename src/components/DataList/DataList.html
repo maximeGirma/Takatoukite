@@ -32,7 +32,18 @@
             </tr>
             <tr class="results" v-for="element in filteredInterventions">
                 <td v-for="value, index in element">
-                    <p v-if="interventionToEdit.reference !== element.reference">{{value}}</p>
+                    <p
+                            v-if="index === 'reference' ||
+                            interventionToEdit.reference !== element.reference ||
+                             (fieldToEdit !== null && fieldToEdit !== index)"
+                            @dblclick="singleEdit(element.reference,index)">
+                        {{value}}
+                    </p>
+                    <input
+                            v-else-if="interventionToEdit.reference === element.reference && fieldToEdit === index"
+                            v-model="interventionToEdit[index]"
+                            @blur="validateChanges"
+                    />
                     <input v-else v-model="interventionToEdit[index]"/>
 
                 </td>
