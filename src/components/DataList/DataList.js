@@ -33,7 +33,9 @@ export default {
             selectedRef: null,
             interventionToEdit: {reference: null},
             fieldToEdit:null,
-            createMode: false
+            createMode: false,
+            globalSearch:null,
+
         }
     },
     computed: {
@@ -41,7 +43,25 @@ export default {
 
             let dataToDisplay
             console.log('juste avant le if')
-            if ((!Helpers.isElementsInArrayEmpty(Helpers.getArrayFromObject(this.searchFields)))) {
+
+            if(this.globalSearch){
+                let searchedInterventions = []
+                for (let i = 0; i < this.interventionsList.length; i++) {
+                    let interventionAsArray = Helpers.getArrayFromObject(this.interventionsList[i])
+                    let shouldReturnIntervention = false
+                    for (let a = 0; a < interventionAsArray.length; a++) {
+                        if (interventionAsArray[a].includes(this.globalSearch)) {
+                            shouldReturnIntervention = true
+                        }
+                    }
+                    if (shouldReturnIntervention) {
+                        searchedInterventions.push(this.interventionsList[i])
+                    }
+                }
+                dataToDisplay = searchedInterventions
+            }
+
+            else if ((!Helpers.isElementsInArrayEmpty(Helpers.getArrayFromObject(this.searchFields)))) {
                 // this.page = 0
                 console.log('MOI AUSSI ! ! ! ! !! ')
                 let searchedInterventions = []

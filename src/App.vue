@@ -58,7 +58,9 @@
             this.$root.$on('confirmCreationEvent', (data)=>{
                 console.log('event root in App.vue trigered', data)
                 interventionsData.addIntervention(data)
+                this.refreshInterventions()
             })
+
         },
         methods: {
             testinou(reference) {

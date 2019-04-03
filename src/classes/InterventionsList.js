@@ -47,8 +47,10 @@ export class InterventionsList{
     addIntervention(rawData){
         console.log(rawData)
         console.log('le caca des pigeons cest caca faut pas manger')
-        let arrData = Helpers.getArrayFromObject(rawData)
-        console.log(Helpers.getKeysFromObject(rawData))
-        arrData.map((e)=>{console.log(e)})
+
+        let intervention = new Intervention(Intervention.buildFromForm(rawData))
+        this.interventionsList.push(intervention)
+        console.log(this.interventionsList.length)
+ //       return this
     }
 }

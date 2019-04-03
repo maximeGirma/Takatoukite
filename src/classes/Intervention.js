@@ -29,6 +29,24 @@ export class Intervention {
         this.status = rawIntervention.status
     }
 
+    static buildFromForm(rawData){
+        console.log('row_data', rawData)
+        return {
+            reference: rawData.reference,
+            start_date: rawData.startDate,
+            end_date: rawData.endDate,
+            address: rawData.address,
+            city: rawData.city,
+            zip: rawData.zip,
+            technician_first_name: rawData.technicianFirstName,
+            technician_last_name: rawData.technicianLastName,
+            telephone_number: rawData.telephoneNumber,
+            type: rawData.type,
+            price: rawData.price,
+            status: rawData.status,
+        }
+    }
+
     getAbstractIntervention() {
         return {
             reference: this.reference,

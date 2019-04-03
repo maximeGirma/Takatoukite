@@ -1,6 +1,7 @@
 .data-list {
 
 }
+
 table, tr, td {
   border: 1px solid black;
   border-spacing: 0;
@@ -15,8 +16,8 @@ th, td, tr {
   //display
 }
 
-#createButton{
-  display:flex;
+#createButton {
+  display: flex;
   align-self: flex-start;
   margin-left: 30px;
   margin-bottom: 30px;
@@ -41,19 +42,26 @@ th, td, tr {
   position: relative;
   text-align: center;
   text-decoration: none;
-  text-shadow: 0 1px 0 #fafafa; }
+  text-shadow: 0 1px 0 #fafafa;
+}
 
+#searchContainer {
+  margin: 0 25px 25px 0;
+  display: flex;
+  align-self:flex-start;
+  align-items: center;
+}
 
-.headers{
+.headers {
   background-color: #4CAF50;
   color: white;
 }
 
-.searchFields{
-  width: 100%;
+.searchFields {
+  width: 90%;
 }
 
-#pageSelectorContainer{
+#pageSelectorContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -61,7 +69,7 @@ th, td, tr {
   width: 50%;
 }
 
-.inline{
+.inline {
   display: flex;
   flex-direction: row;
   align-self: center;
@@ -77,29 +85,36 @@ th, td, tr {
   width: 70px;
 }
 
-#results{
+#results {
 
 }
 
-.results:nth-child(even) {background-color: #f2f2f2;}
-.results:hover {background-color: #d6d6d6;}
+.results:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-.actionContainer{
-  display:flex;
-  flex-direction: row ;
+.results:hover {
+  background-color: #d6d6d6;
+}
+
+.actionContainer {
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
 }
 
-.actionItems{
+.actionItems {
   padding: 2px;
 }
+
 //responsive
 
-@media all and (max-width: 980px){
+@media all and (max-width: 980px) {
   th, td, tr {
     background-color: #5b40ff;
   }
 }
+
 //
 //@media all and (max-width: 230px) {
 //

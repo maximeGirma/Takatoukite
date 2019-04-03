@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faTrashAlt, faPen,faInfoCircle ,faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faTrashAlt, faPen,faInfoCircle ,faCheck, faTimes, faSearch} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // import BootstrapVue from 'bootstrap-vue'
@@ -19,6 +19,8 @@ library.add(faPen)
 library.add(faInfoCircle)
 library.add(faCheck)
 library.add(faTimes)
+library.add(faSearch)
+
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({

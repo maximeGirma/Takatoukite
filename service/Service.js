@@ -31,7 +31,7 @@ const interventionTypes = [
     'Installation',
     'Maintenance',
     'Formation',
-    'Apero'
+    'Dépannage'
 ]
 
 const status = [
