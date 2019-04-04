@@ -21,7 +21,7 @@
 
             <div id="searchContainer">
                 <font-awesome-icon icon="search"/>
-                <input style="margin-left: 10px; margin-right:10px" placeholder="Rechercher" v-model="globalSearch"/>
+                <input style="margin-left: 10px; margin-right:10px; border-radius:20px;margin-left: 2px;" placeholder="Rechercher" v-model="globalSearch"/>
                 <font-awesome-icon v-if="globalSearch !== null" icon="times" @click="globalSearch=null"/>
             </div>
             <!--Would be cool to select his own elements-->

@@ -56,12 +56,14 @@ th, td, tr {
 }
 
 .headers {
-  background-color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.76);
   color: white;
 }
 
 .searchFields {
   width: 90%;
+  border-radius: 20px;
+  padding: 2px;
 }
 
 #pageSelectorContainer {
@@ -70,6 +72,7 @@ th, td, tr {
   justify-content: space-around;
   align-items: center;
   width: 50%;
+
 }
 
 .inline {
@@ -86,6 +89,7 @@ th, td, tr {
   height: 29px;
   overflow: hidden;
   width: 70px;
+  min-width: 40px;
 }
 
 #results {

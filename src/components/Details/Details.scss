@@ -1,3 +1,13 @@
+#mainContainer{
+  width: 500px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: center;
+  margin:auto;
+
+}
+
 table, tr, td {
   border: 1px solid black;
   border-spacing: 0;
@@ -31,6 +41,8 @@ table, tr, td {
   text-decoration: none;
   text-shadow: 0 1px 0 #fafafa; }
 
+
+
 th, td, tr {
   //padding: 10px;
   text-align: center;
@@ -41,12 +53,48 @@ th, td, tr {
 }
 
 .headers{
-  background-color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.76);
   color: white;
+
+}
+
+#errorForm{
+  width: 300px;
+  height: 200px;
+  background-color: #ff0500;
+  display:flex;
+  align-self: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+}
+
+.valueContainer{
+
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: center;
+  margin:auto;
+  height:600px;
+}
+
+#label{
+  margin-bottom: 3px;
+  margin-top:3px;
+  align-self: center;
+  padding:auto;
 }
 
 .searchFields{
   width: 100%;
+}
+
+#detailsContainer{
+  display:flex;
+  flex-direction: row;
 }
 
 #pageSelectorContainer{

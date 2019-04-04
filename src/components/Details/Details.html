@@ -1,29 +1,44 @@
-<div >
-    <input type="button" value="Retour" id="return" @click="goBack"/>
-    <table>
-        <tr>
-            <td class="headers" v-for="element in headerArray">{{element}}</td>
-        </tr>
-        <tr>
-            <td  v-for="element, index in mDetails">
-                <p v-if="!editMode">{{element}}</p>
+<div id="mainContainer">
+    <div id="errorForm" v-if="errorForm !== null">
+        <p>Le formulaire est invalide.</p>
+        <p>{{errorForm}}</p>
+
+
+        <MainButton
+                :eventKey="'dismissModal'"
+                :label="'Fermer'"
+                @dismissModal="errorForm = null"
+        />
+    </div>
+    <div class="actionContainer" v-if="!editMode">
+        <input type="button" value="Retour" id="return" @click="goBack"/>
+        <MainButton :label="'Editer'" :eventKey="'editEvent'" @editEvent="toggleEditMode(true)"/>
+        <MainButton :label="'Supprimer'" :eventKey="'deleteEvent'" @deleteEvent="askForDeletion(element.reference)"/>
+    </div>
+
+    <div v-else class="actionContainer">
+        <p class="actionItems" @click="validateChanges">
+            Valider
+            <br/>
+            <br/>
+            <font-awesome-icon icon="check"/>
+        </p>
+        <p class="actionItems" @click="toggleEditMode(false)">
+            Annuler
+            <br/>
+            <br/>
+            <font-awesome-icon icon="times"/>
+        </p>
+    </div>
+    <div id="detailsContainer">
+        <div class="valueContainer">
+            <div class="headers" v-for="element in headerArray"><p id="label">{{element}}</p></div>
+        </div>
+        <div class="valueContainer">
+            <div v-for="element, index in mDetails">
+                <p v-if="!editMode || index === 'reference'">{{element}}</p>
                 <input v-else v-model="mDetails[index]"/>
-            </td>
-
-            <div v-if="!editMode" class="actionContainer">
-                <p class="actionItems" @click="toggleEditMode(true)"><font-awesome-icon icon="pen" /></p>
-                <p class="actionItems" @click="askForDeletion(element.reference)"><font-awesome-icon icon="trash-alt" /></p>
             </div>
-            <div v-else class="actionContainer">
-                <p class="actionItems" @click="validateChanges"><font-awesome-icon icon="check" /></p>
-                <p class="actionItems" @click="toggleEditMode(false)"><font-awesome-icon icon="times" /></p>
-            </div>
-
-
-
-
-        </tr>
-
-    </table>
-
+        </div>
+    </div>
 </div>
