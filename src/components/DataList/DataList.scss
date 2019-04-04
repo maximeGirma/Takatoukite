@@ -1,8 +1,11 @@
 .data-list {
 
 }
+table{
+  border-spacing: 0;
+}
 
-table, tr, td {
+tr, td {
   border: 1px solid black;
   border-spacing: 0;
 }
@@ -110,8 +113,12 @@ th, td, tr {
 //responsive
 
 @media all and (max-width: 980px) {
-  th, td, tr {
-    background-color: #5b40ff;
+  p {
+    //background-color: #5b40ff;
+    font-size: 10px;
+  }
+  td, tr {
+    font-size: 10px
   }
 }
 

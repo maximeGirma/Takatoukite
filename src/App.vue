@@ -2,7 +2,9 @@
     <div id="app" >
 
         <!--<img alt="Vue logo" src="./assets/logo.png">-->
-        <p>Interventions manager</p>
+        <div id="appTitleContainer">
+        <p id="appTitle">Interventions manager</p>
+        </div>
         <DataList
                 v-if="!interventionDetails"
                 :interventionsList="interventionsList"
@@ -103,6 +105,7 @@
 </script>
 
 <style>
+
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -111,4 +114,19 @@
         color: #2c3e50;
         margin-top: 60px;
     }
+
+    #appTitleContainer{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom:10px;
+        width: 100%;
+        background-color: #eae9e5;
+
+    }
+
+    #appTitle{
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        font-size: 20px;
+    }
+
 </style>
